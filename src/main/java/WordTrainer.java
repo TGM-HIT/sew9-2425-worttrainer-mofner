@@ -9,7 +9,7 @@ public class WordTrainer {
 
     public WordTrainer(List<WordImagePair> wordImagePairs) {
         if (wordImagePairs == null || wordImagePairs.isEmpty()) {
-            throw new IllegalArgumentException("Die Liste darf nicht leer sein.");
+            throw new IllegalArgumentException("Die Liste der Wort-Bild-Paare darf nicht leer sein.");
         }
         this.wordImagePairs = wordImagePairs;
         this.selectedPair = null;
@@ -26,6 +26,8 @@ public class WordTrainer {
         totalAttempts++;
         if (selectedPair.getWord().equalsIgnoreCase(input)) {
             correctAttempts++;
+            wordImagePairs.remove(selectedPair); // Entferne das Paar bei richtiger Antwort
+            selectedPair = null; // Paar abwählen
             return true;
         }
         return false;
@@ -35,15 +37,15 @@ public class WordTrainer {
         return selectedPair != null ? selectedPair.getImageUrl() : null;
     }
 
-    public WordImagePair getSelectedPair() {
-        return selectedPair;
-    }
-
     public int getTotalAttempts() {
         return totalAttempts;
     }
 
     public int getCorrectAttempts() {
         return correctAttempts;
+    }
+
+    public boolean hasPairsLeft() {
+        return !wordImagePairs.isEmpty();
     }
 }
