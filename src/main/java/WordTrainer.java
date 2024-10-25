@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 
-public class WordTrainer {
+public class WordTrainer implements Serializable {
     private List<WordImagePair> wordImagePairs;
     private WordImagePair selectedPair;
     private int totalAttempts;
@@ -15,6 +16,20 @@ public class WordTrainer {
         this.selectedPair = null;
         this.totalAttempts = 0;
         this.correctAttempts = 0;
+    }
+
+    // Setter-Methoden für die Statistik
+    public void setTotalAttempts(int totalAttempts) {
+        this.totalAttempts = totalAttempts;
+    }
+
+    public void setCorrectAttempts(int correctAttempts) {
+        this.correctAttempts = correctAttempts;
+    }
+
+    // Getter-Methode für die Wort-Bild-Paare
+    public List<WordImagePair> getWordImagePairs() {
+        return wordImagePairs;
     }
 
     public void selectRandomPair() {
